@@ -3,77 +3,500 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alexandr Kim - Mechanical Engineering Portfolio</title>
+    <title>Alexandr Kim — Mechanical Engineering Portfolio</title>
+    
+    <!-- Professional Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --bg-main: #111418;          /* Gentle deep charcoal background */
+            --bg-card: #1a2026;          /* Softened card surface */
+            --bg-inner: #0e1216;         /* Dark inner container */
+            --border-line: #2d3640;      /* Subtle, gentle border line */
+            --text-heading: #f0f4f8;     /* Soft white for headings */
+            --text-body: #9ba1a6;        /* Gentle muted gray for readability */
+            --text-muted: #6c757d;       /* Darker muted text for footnotes */
+            --accent: #4a90e2;           /* Muted professional blue */
+        }
+
+        * { box-sizing: border-box; }
+        
+        /* Smooth scrolling + offset so sticky header doesn't cover section titles */
+        html { 
+            scroll-behavior: smooth;
+            scroll-padding-top: 70px;
+        }
+
         body {
-            background-color: #0d1117;
-            color: #c9d1d9;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            line-height: 1.6;
+            background-color: var(--bg-main);
+            color: var(--text-body);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 300;
+            font-size: 1rem;
+            line-height: 1.65;
+            margin: 0;
+            padding: 0;
         }
-        h1, h2, h3 { color: #ffffff; }
-        a { color: #58a6ff; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        .project {
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            padding: 24px;
-            margin-bottom: 30px;
-        }
-        .project img {
-            width: 100%;
-            border-radius: 4px;
-            margin-top: 12px;
-        }
-        .footer {
-            margin-top: 50px;
-            border-top: 1px solid #30363d;
-            padding-top: 20px;
+
+        /* Top Sticky Navigation Bar */
+        nav.top-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(17, 20, 24, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-line);
+            padding: 16px 40px;
             display: flex;
-            gap: 20px;
+            justify-content: flex-end;
+            gap: 32px;
+        }
+
+        nav.top-nav a {
+            color: var(--text-body);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            transition: color 0.2s ease;
+        }
+
+        nav.top-nav a:hover { color: var(--accent); }
+
+        /* Widescreen Layout (1250px) */
+        .container {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        /* Bio Header Section (#about anchor) */
+        header.main-header {
+            border-bottom: 1px solid var(--border-line);
+            padding-bottom: 40px;
+            margin-bottom: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .bio-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        h1 {
+            color: var(--text-heading);
+            font-weight: 600;
+            font-size: 2.8rem;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.01em;
+        }
+
+        .subtitle {
+            color: var(--accent);
+            font-size: 1.15rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            letter-spacing: 0.04em;
+        }
+
+        .profile-photo-container {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 2px solid var(--border-line);
+            overflow: hidden;
+            background-color: var(--bg-card);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Section Headings */
+        h2.section-title {
+            color: var(--text-heading);
+            font-weight: 500;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-line);
+            padding-bottom: 12px;
+            margin-top: 20px;
+            margin-bottom: 35px;
+            letter-spacing: 0.03em;
+        }
+
+        /* Project Card Container */
+        .project-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-line);
+            border-radius: 6px;
+            padding: 40px;
+            margin-bottom: 50px;
+        }
+
+        .project-title {
+            color: var(--text-heading);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 14px;
+        }
+
+        .general-overview {
+            margin-bottom: 24px;
+            font-size: 1.02rem;
+            color: #b0b7bc;
+        }
+
+        /* Hero Image Carousel */
+        .carousel-container {
+            background: var(--bg-inner);
+            border: 1px solid var(--border-line);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .main-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background-color: #080a0d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-image-wrapper img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(26, 32, 38, 0.85);
+            color: var(--text-heading);
+            border: 1px solid var(--border-line);
+            font-size: 1.3rem;
+            padding: 12px 16px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s ease, color 0.2s ease;
+            border-radius: 4px;
+        }
+
+        .nav-btn:hover { background: var(--accent); color: #fff; }
+        .nav-btn.prev { left: 16px; }
+        .nav-btn.next { right: 16px; }
+
+        .image-caption-panel {
+            padding: 16px 24px;
+            border-top: 1px solid var(--border-line);
+            background: #14191f;
+        }
+
+        .caption-title {
+            color: var(--text-heading);
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .caption-text {
+            color: var(--text-body);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .thumb-strip {
+            display: flex;
+            gap: 10px;
+            padding: 12px 20px;
+            background: var(--bg-inner);
+            border-top: 1px solid var(--border-line);
+            overflow-x: auto;
+        }
+
+        .thumb {
+            width: 75px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.2s ease, border-color 0.2s ease;
+        }
+
+        .thumb.active, .thumb:hover {
+            opacity: 1;
+            border-color: var(--accent);
+        }
+
+        .metrics-block {
+            background-color: var(--bg-inner);
+            border: 1px solid var(--border-line);
+            border-radius: 6px;
+            padding: 18px 24px;
+            margin-bottom: 16px;
+        }
+
+        .metrics-title {
+            color: var(--text-heading);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            letter-spacing: 0.03em;
+        }
+
+        .metrics-list {
+            margin: 0;
+            padding-left: 20px;
+            color: var(--text-body);
+            font-size: 0.95rem;
+        }
+
+        .metrics-list li { margin-bottom: 4px; }
+
+        .project-skills-footer {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            letter-spacing: 0.02em;
+            border-top: 1px dashed var(--border-line);
+            padding-top: 12px;
+            margin-top: 16px;
+        }
+
+        footer.main-footer {
+            border-top: 1px solid var(--border-line);
+            padding-top: 35px;
+            margin-top: 70px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 28px;
+            margin-top: 16px;
+        }
+
+        footer.main-footer a { color: var(--accent); text-decoration: none; font-weight: 400; }
+
+        @media (max-width: 768px) {
+            nav.top-nav { justify-content: center; padding: 12px 16px; gap: 18px; }
+            .main-image-wrapper { height: 320px; }
+            .container { padding: 30px 16px; }
+            .project-card { padding: 24px; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Alexandr Kim</h1>
-        <p>Description.</p>
-    </header>
+    <!-- Working Top Navigation Anchors -->
+    <nav class="top-nav">
+        <a href="#about">Bio</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
 
-    <hr style="border: 0; border-top: 1px solid #30363d; margin: 30px 0;">
+    <div class="container">
 
-    <section>
-        <h2>Projects</h2>
+        <!-- Header Section anchored with id="about" -->
+        <header class="main-header" id="about">
+            <div class="bio-content">
+                <h1>Alexandr Kim</h1>
+                <div class="subtitle">Mechanical Engineering Sophomore</div>
+                <p style="max-width: 800px; margin: 0; font-size: 1.05rem;">Focused on drivetrain design, structural optimization, and physical prototyping. Converting CAD concepts into hardware through FEA stress validation and empirical test benches.</p>
+            </div>
+            <!-- Place your profile picture at images/profile.jpg -->
+            <div class="profile-photo-container">
+                <img src="images/profile.jpg" alt="Alexandr Kim Portrait">
+            </div>
+        </header>
 
-        <div class="project">
-            <h3>Baja SAE Transfer Case</h3>
-            <p>description</p>
-            <img src="images/baja-render.jpg" alt="Baja Transfer Case CAD Render">
-        </div>
+        <!-- Projects Section anchored with id="projects" -->
+        <main id="projects">
+            <h2 class="section-title">Projects</h2>
 
-        <<div class="project">
-            <h3>Baja SAE Transfer Case</h3>
-            <p>description</p>
-            <img src="images/baja-render.jpg" alt="Baja Transfer Case CAD Render">
-        </div>
+            <!-- Project 1: Baja Transfer Case -->
+            <article class="project-card">
+                <h3 class="project-title">Baja SAE Transfer Case & Alignment Fixture</h3>
+                
+                <p class="general-overview">
+                    Designed a custom two-stage gear reduction box for Baja SAE to replace stock commercial gearboxes. Evaluated shaft gear reduction ratios, performed torsional shear stress FEA on drive shafts, and engineered a 3D-printed skeletal alignment fixture to visually verify gear meshing prior to CNC machining.
+                </p>
 
-        <div class="project">
-            <h3>Baja SAE Transfer Case</h3>
-            <p>description</p>
-            <img src="images/baja-render.jpg" alt="Baja Transfer Case CAD Render">
-        </div>
-    </section>
+                <!-- Hero Carousel -->
+                <div class="carousel-container">
+                    <div class="main-image-wrapper">
+                        <button class="nav-btn prev" onclick="changeSlide('baja', -1)">&#10094;</button>
+                        <img id="baja-main-img" src="images/baja-render.jpg" alt="Project Visual">
+                        <button class="nav-btn next" onclick="changeSlide('baja', 1)">&#10095;</button>
+                    </div>
 
-    <div class="footer">
-        <a href="mailto:your.email@university.edu">Email</a>
-        <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
-        <a href="assets/Resume.pdf" target="_blank">Resume PDF</a>
+                    <div class="image-caption-panel">
+                        <div class="caption-title" id="baja-cap-title">1. Full Transfer Case CAD Assembly</div>
+                        <p class="caption-text" id="baja-cap-desc">Exploded 3D assembly showing two-stage gear reduction, custom aluminum housing packaging, and shaft bearing placements.</p>
+                    </div>
+
+                    <div class="thumb-strip" id="baja-thumbs">
+                        <img src="images/baja-render.jpg" class="thumb active" onclick="setSlide('baja', 0)">
+                        <img src="images/baja-fea.jpg" class="thumb" onclick="setSlide('baja', 1)">
+                        <img src="images/baja-rig.jpg" class="thumb" onclick="setSlide('baja', 2)">
+                    </div>
+                </div>
+
+                <div class="metrics-block">
+                    <div class="metrics-title">Technical Validation & Metrics</div>
+                    <ul class="metrics-list">
+                        <li><strong>Weight Reduction:</strong> 18.5% total mass reduction over original gearbox assembly.</li>
+                        <li><strong>Factor of Safety:</strong> Minimum FOS of 2.1 under max engine stall torque.</li>
+                        <li><strong>Validation Method:</strong> Verified contact pattern alignment on 3D-printed test rig before milling stock.</li>
+                    </ul>
+                </div>
+
+                <div class="project-skills-footer">
+                    <strong>Tools & Processes:</strong> SolidWorks CAD · ANSYS FEA · CNC Milling (6061-T6) · 3D Printed Fixturing
+                </div>
+            </article>
+
+            <!-- 
+              ============================================================
+              COMMENTED-OUT PROJECT TEMPLATE 
+              To add a new project, copy everything between the comments below,
+              paste it above, change your unique ID, and update the JS array!
+              ============================================================
+            -->
+            <!--
+            <article class="project-card">
+                <h3 class="project-title">Your New Project Title Here</h3>
+                
+                <p class="general-overview">
+                    Write your high-level project summary and objectives here.
+                </p>
+
+                <div class="carousel-container">
+                    <div class="main-image-wrapper">
+                        <button class="nav-btn prev" onclick="changeSlide('newproj', -1)">&#10094;</button>
+                        <img id="newproj-main-img" src="images/placeholder1.jpg" alt="Project Visual">
+                        <button class="nav-btn next" onclick="changeSlide('newproj', 1)">&#10095;</button>
+                    </div>
+
+                    <div class="image-caption-panel">
+                        <div class="caption-title" id="newproj-cap-title">1. First Photo Title</div>
+                        <p class="caption-text" id="newproj-cap-desc">Description for the first photo.</p>
+                    </div>
+
+                    <div class="thumb-strip" id="newproj-thumbs">
+                        <img src="images/placeholder1.jpg" class="thumb active" onclick="setSlide('newproj', 0)">
+                        <img src="images/placeholder2.jpg" class="thumb" onclick="setSlide('newproj', 1)">
+                    </div>
+                </div>
+
+                <div class="metrics-block">
+                    <div class="metrics-title">Technical Validation & Metrics</div>
+                    <ul class="metrics-list">
+                        <li><strong>Metric 1:</strong> Result description.</li>
+                    </ul>
+                </div>
+
+                <div class="project-skills-footer">
+                    <strong>Tools & Processes:</strong> CAD Tool · Manufacturing Method
+                </div>
+            </article>
+            -->
+
+        </main>
+
+        <!-- Contact Section anchored with id="contact" -->
+        <footer class="main-footer" id="contact">
+            <h2 class="section-title" style="margin-top: 0;">Contact</h2>
+            <p>Feel free to reach out via email or connect on LinkedIn.</p>
+            <div class="footer-links">
+                <a href="mailto:v.alexandr.kim@gmail.com">Email Me</a>
+                <a href="https://www.linkedin.com/in/alexandr-v-kim" target="_blank">LinkedIn Profile</a>
+                <a href="assets/Resume.pdf" target="_blank">Download Resume (PDF)</a>
+            </div>
+        </footer>
+
     </div>
 
+    <!-- JavaScript Handling Carousels -->
+    <script>
+        const projectData = {
+            baja: [
+                {
+                    src: "images/baja-render.jpg",
+                    title: "1. Full Transfer Case CAD Assembly",
+                    desc: "Exploded 3D assembly showing two-stage gear reduction, custom aluminum housing packaging, and shaft bearing placements."
+                },
+                {
+                    src: "images/baja-fea.jpg",
+                    title: "2. Shaft FEA Stress Analysis",
+                    desc: "Von Mises stress heatmap under 250 Nm peak torque, confirming safety factor > 2.1 across keyway stress risers."
+                },
+                {
+                    src: "images/baja-rig.jpg",
+                    title: "3. 3D-Printed Bevel Alignment Rig",
+                    desc: "Transparent 3D-printed test housing used to inspect gear tooth contact patterns with marking compound before CNC milling."
+                }
+            ]
+            /* 
+              Add your new project data here when you uncomment the HTML template above:
+              ,
+              newproj: [
+                  { src: "images/placeholder1.jpg", title: "Photo 1", desc: "Desc 1" },
+                  { src: "images/placeholder2.jpg", title: "Photo 2", desc: "Desc 2" }
+              ]
+            */
+        };
+
+        const currentIndices = { baja: 0 };
+
+        function updateCarouselUI(projId) {
+            const idx = currentIndices[projId];
+            const data = projectData[projId][idx];
+
+            document.getElementById(`${projId}-main-img`).src = data.src;
+            document.getElementById(`${projId}-cap-title`).innerText = data.title;
+            document.getElementById(`${projId}-cap-desc`).innerText = data.desc;
+
+            const thumbs = document.querySelectorAll(`#${projId}-thumbs .thumb`);
+            thumbs.forEach((t, i) => {
+                if (i === idx) t.classList.add('active');
+                else t.classList.remove('active');
+            });
+        }
+
+        function changeSlide(projId, direction) {
+            const total = projectData[projId].length;
+            currentIndices[projId] = (currentIndices[projId] + direction + total) % total;
+            updateCarouselUI(projId);
+        }
+
+        function setSlide(projId, index) {
+            currentIndices[projId] = index;
+            updateCarouselUI(projId);
+        }
+    </script>
 </body>
 </html>
