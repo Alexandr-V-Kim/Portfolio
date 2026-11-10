@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexandr Kim - Mechanical Engineering Portfolio</title>
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        h1, h2, h3 { color: #ffffff; }
+        a { color: #58a6ff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .project {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 24px;
+            margin-bottom: 30px;
+        }
+        .project img {
+            width: 100%;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            margin-top: 50px;
+            border-top: 1px solid #30363d;
+            padding-top: 20px;
+            display: flex;
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Alexandr Kim</h1>
+        <p>Description.</p>
+    </header>
+
+    <hr style="border: 0; border-top: 1px solid #30363d; margin: 30px 0;">
+
+    <section>
+        <h2>Projects</h2>
+
+        <div class="project">
+            <h3>Baja SAE Transfer Case</h3>
+            <p>description</p>
+            <img src="images/baja-render.jpg" alt="Baja Transfer Case CAD Render">
+        </div>
+
+        <<div class="project">
+            <h3>Baja SAE Transfer Case</h3>
+            <p>description</p>
+            <img src="images/baja-render.jpg" alt="Baja Transfer Case CAD Render">
+        </div>
+
+        <div class="project">
+            <h3>Baja SAE Transfer Case</h3>
+            <p>description</p>
+            <img src="images/baja-render.jpg" alt="Baja Transfer Case CAD Render">
+        </div>
+    </section>
+
+    <div class="footer">
+        <a href="mailto:your.email@university.edu">Email</a>
+        <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+        <a href="assets/Resume.pdf" target="_blank">Resume PDF</a>
+    </div>
+
+</body>
+</html>
