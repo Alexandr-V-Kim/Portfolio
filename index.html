@@ -12,14 +12,14 @@
 
     <style>
         :root {
-            --bg-main: #111418;          /* Gentle deep charcoal background */
-            --bg-card: #1a2026;          /* Softened card surface */
-            --bg-inner: #0e1216;         /* Dark inner container */
-            --border-line: #2d3640;      /* Subtle, gentle border line */
-            --text-heading: #f0f4f8;     /* Soft white for headings */
-            --text-body: #9ba1a6;        /* Gentle muted gray for readability */
-            --text-muted: #6c757d;       /* Darker muted text for footnotes */
-            --accent: #4a90e2;           /* Muted professional blue */
+            --bg-main: #111418;        /* Gentle deep charcoal background */
+            --bg-card: #1a2026;        /* Softened card surface */
+            --bg-inner: #0e1216;       /* Dark inner container */
+            --border-line: #2d3640;    /* Subtle, gentle border line */
+            --text-heading: #ffffff;   /* Brightened to pure white */
+            --text-body: #F5F5F5;      /* Brightened for high readability */
+            --text-muted: #869099;     /* Slightly brighter muted text for footnotes */
+            --accent: #58a6ff;         /* Vibrant professional blue */
         }
 
         * { box-sizing: border-box; }
@@ -89,13 +89,16 @@
         .bio-content {
             flex: 1;
             min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         h1 {
             color: var(--text-heading);
             font-weight: 600;
             font-size: 2.8rem;
-            margin: 0 0 10px 0;
+            margin: 0;
             letter-spacing: -0.01em;
         }
 
@@ -104,13 +107,28 @@
             font-size: 1.15rem;
             font-weight: 500;
             text-transform: uppercase;
-            margin-bottom: 16px;
+            margin: 0;
             letter-spacing: 0.04em;
         }
 
+        .location-text {
+            max-width: 800px;
+            margin: 0;
+            font-size: 1.35rem;
+            color: var(--text-heading);
+            font-weight: 400;
+        }
+
+        .bio-paragraph {
+            max-width: 800px;
+            margin: 0;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
         .profile-photo-container {
-            width: 160px;
-            height: 160px;
+            width: 300px;
+            height: 300px;
             border-radius: 50%;
             border: 2px solid var(--border-line);
             overflow: hidden;
@@ -160,7 +178,7 @@
         .general-overview {
             margin-bottom: 24px;
             font-size: 1.02rem;
-            color: #b0b7bc;
+            color: var(--text-body);
         }
 
         /* Hero Image Carousel */
@@ -227,30 +245,50 @@
             margin: 0;
         }
 
+        /* --- UPDATED THUMBNAIL STRIP STYLES --- */
         .thumb-strip {
             display: flex;
-            gap: 10px;
-            padding: 12px 20px;
+            align-items: center;
+            justify-content: flex-start; /* Aligns thumbnails to the left */
+            gap: 12px;
+            padding: 14px 20px;
             background: var(--bg-inner);
             border-top: 1px solid var(--border-line);
             overflow-x: auto;
+            scroll-behavior: smooth;
+        }
+
+        .thumb-strip::-webkit-scrollbar {
+            height: 6px;
+        }
+        .thumb-strip::-webkit-scrollbar-thumb {
+            background-color: var(--border-line);
+            border-radius: 3px;
         }
 
         .thumb {
-            width: 75px;
-            height: 50px;
+            width: 80px;
+            height: 55px;
+            flex-shrink: 0;
             object-fit: cover;
             border-radius: 4px;
-            border: 2px solid transparent;
+            border: 2px solid var(--border-line);
             cursor: pointer;
-            opacity: 0.5;
-            transition: opacity 0.2s ease, border-color 0.2s ease;
+            opacity: 0.6;
+            transition: all 0.2s ease;
         }
 
-        .thumb.active, .thumb:hover {
+        .thumb:hover {
+            opacity: 0.9;
+            border-color: var(--text-muted);
+        }
+
+        .thumb.active {
             opacity: 1;
             border-color: var(--accent);
+            transform: scale(1.03);
         }
+        /* --- END OF THUMBNAIL STYLES --- */
 
         .metrics-block {
             background-color: var(--bg-inner);
@@ -325,8 +363,8 @@
             <div class="bio-content">
                 <h1>Alexandr Kim</h1>
                 <div class="subtitle">Mechanical Engineering Sophomore at UCLA</div>
-                <p style="max-width: 800px; margin: 0; font-size: 1.5rem;">US Citizen living in Los Angeles Area</p>
-                <p style="max-width: 800px; margin: 0; font-size: 1.05rem;">Description</p>
+                <p class="location-text">US Citizen | Greater Los Angeles Area</p>
+                <p class="bio-paragraph">I have experience taking mechanical parts from initial design stages through analysis and validation, and on to manufacturing and testing. I pride myself on owning a component from beginning to end, ensuring it meets all required constraints while seamlessly interfacing with and supporting surrounding parts. Manufacturing and assembling components myself has given me practical insight into how to design hardware that is both functional and fast to fabricate.</p>
             </div>
             <!-- Place your profile picture at images/profile.jpg -->
             <div class="profile-photo-container">
@@ -361,8 +399,11 @@
 
                     <div class="thumb-strip" id="baja-thumbs">
                         <img src="images/centerlock-assembly.jpg" class="thumb active" onclick="setSlide('baja', 0)">
-                        <img src="images/baja-fea.jpg" class="thumb" onclick="setSlide('baja', 1)">
-                        <img src="images/baja-rig.jpg" class="thumb" onclick="setSlide('baja', 2)">
+                        <img src="images/centerlock-section.jpg" class="thumb" onclick="setSlide('baja', 1)">
+                        <img src="images/centerlock-housing.jpg" class="thumb" onclick="setSlide('baja', 2)">
+                        <img src="images/centerlock-housingB.jpg" class="thumb" onclick="setSlide('baja', 3)">
+                        <img src="images/centerlock-housing_fea.jpg" class="thumb" onclick="setSlide('baja', 4)">
+                        <img src="images/centerlock-shaft_fea.jpg" class="thumb" onclick="setSlide('baja', 5)">
                     </div>
                 </div>
 
@@ -380,51 +421,47 @@
                 </div>
             </article>
 
-            <!-- 
-              ============================================================
-              COMMENTED-OUT PROJECT TEMPLATE 
-              To add a new project, copy everything between the comments below,
-              paste it above, change your unique ID, and update the JS array!
-              ============================================================
-            -->
-            <!--
+            <!-- Project 2: Underwater Robot -->
             <article class="project-card">
-                <h3 class="project-title">Your New Project Title Here</h3>
+                <h3 class="project-title">Underwater Robot</h3>
                 
                 <p class="general-overview">
-                    Write your high-level project summary and objectives here.
+                    Description
                 </p>
 
+                <!-- Hero Carousel -->
                 <div class="carousel-container">
                     <div class="main-image-wrapper">
-                        <button class="nav-btn prev" onclick="changeSlide('newproj', -1)">&#10094;</button>
-                        <img id="newproj-main-img" src="images/placeholder1.jpg" alt="Project Visual">
-                        <button class="nav-btn next" onclick="changeSlide('newproj', 1)">&#10095;</button>
+                        <button class="nav-btn prev" onclick="changeSlide('underwater', -1)">&#10094;</button>
+                        <img id="underwater-main-img" src="images/uwr-real.jpg" alt="Project Visual">
+                        <button class="nav-btn next" onclick="changeSlide('underwater', 1)">&#10095;</button>
                     </div>
 
                     <div class="image-caption-panel">
-                        <div class="caption-title" id="newproj-cap-title">1. First Photo Title</div>
-                        <p class="caption-text" id="newproj-cap-desc">Description for the first photo.</p>
+                        <div class="caption-title" id="underwater-cap-title">1. Full Transfer Case CAD Assembly</div>
+                        <p class="caption-text" id="underwater-cap-desc">Description</p>
                     </div>
 
-                    <div class="thumb-strip" id="newproj-thumbs">
-                        <img src="images/placeholder1.jpg" class="thumb active" onclick="setSlide('newproj', 0)">
-                        <img src="images/placeholder2.jpg" class="thumb" onclick="setSlide('newproj', 1)">
+                    <div class="thumb-strip" id="underwater-thumbs">
+                        <img src="images/uwr-real.jpg" class="thumb active" onclick="setSlide('underwater', 0)">
+                        <img src="images/uwr-assembly.jpg" class="thumb" onclick="setSlide('underwater', 1)">
+                        <img src="images/uwr-motors.jpg" class="thumb" onclick="setSlide('underwater', 2)">
                     </div>
                 </div>
 
                 <div class="metrics-block">
                     <div class="metrics-title">Technical Validation & Metrics</div>
                     <ul class="metrics-list">
-                        <li><strong>Metric 1:</strong> Result description.</li>
+                        <li><strong>Weight Reduction:</strong> 45% total mass reduction over previous assembly.</li>
+                        <li><strong>Smth:</strong> Smth</li>
+                        <li><strong>Smth:</strong> Smth</li>
                     </ul>
                 </div>
 
                 <div class="project-skills-footer">
-                    <strong>Tools & Processes:</strong> CAD Tool · Manufacturing Method
+                    <strong>Tools and Processes Used:</strong> SolidWorks CAD etc etc
                 </div>
             </article>
-            -->
 
         </main>
 
@@ -447,31 +484,55 @@
             baja: [
                 {
                     src: "images/centerlock-assembly.jpg",
-                    title: "1. Full Transfer Case CAD Assembly",
+                    title: "1. Full Centerlock CAD Assembly",
                     desc: "Desc."
                 },
                 {
-                    src: "images/baja-fea.jpg",
-                    title: "2. Shaft FEA Stress Analysis",
+                    src: "images/centerlock-section.jpg",
+                    title: "2. Centerlock Section View",
                     desc: "Desc."
                 },
                 {
-                    src: "images/baja-rig.jpg",
-                    title: "3. smth?",
+                    src: "images/centerlock-housing.jpg",
+                    title: "3. Centerlock Housing Part A",
+                    desc: "Desc."
+                },
+                {
+                    src: "images/centerlock-housingB.jpg",
+                    title: "4. Centerlock Housing Part B",
+                    desc: "Desc."
+                },
+                {
+                    src: "images/centerlock-housing_fea.jpg",
+                    title: "5. Centerlock Housing FEA",
+                    desc: "Desc."
+                },
+                {
+                    src: "images/centerlock-shaft_fea.jpg",
+                    title: "6. Centerlock Shaft FEA",
+                    desc: "Desc."
+                }
+            ],
+            underwater: [
+                {
+                    src: "images/uwr-real.jpg",
+                    title: "1. Underwater Vehicle Fully Assembled",
+                    desc: "Desc."
+                },
+                {
+                    src: "images/uwr-assembly.jpg",
+                    title: "2. Underwater Vehicle CAD Assembly",
+                    desc: "Desc."
+                },
+                {
+                    src: "images/uwr-motors.jpg",
+                    title: "3. Underwater Vehicle Motor Mount",
                     desc: "Desc."
                 }
             ]
-            /* 
-              Add your new project data here when you uncomment the HTML template above:
-              ,
-              newproj: [
-                  { src: "images/placeholder1.jpg", title: "Photo 1", desc: "Desc 1" },
-                  { src: "images/placeholder2.jpg", title: "Photo 2", desc: "Desc 2" }
-              ]
-            */
         };
 
-        const currentIndices = { baja: 0 };
+        const currentIndices = { baja: 0, underwater: 0 };
 
         function updateCarouselUI(projId) {
             const idx = currentIndices[projId];
